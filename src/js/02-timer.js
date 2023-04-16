@@ -1,4 +1,5 @@
 import flatpickr from 'flatpickr';
+import {Block} from 'notiflix';
 // Додатковий імпорт стилів
 import 'flatpickr/dist/flatpickr.min.css';
 const inputDate = document.querySelector('#datetime-picker');
@@ -20,7 +21,14 @@ const options = {
     onClose(selectedDates) {
         
         if (selectedDates[0] <= new Date()) {
-            window.alert('Please choose a date in the future');
+            Block.circle,
+              Block.standard('body', 'Please choose a date in the future', {
+                backgroundColor: 'rgba(191,160,160,0.8)',
+                color: 'rgb(0,0,0)',
+
+                svgSize: '50px',
+              });
+            Block.remove('body', 1923);
             startBtn.setAttribute('disabled', 'true');
         }
         else {
