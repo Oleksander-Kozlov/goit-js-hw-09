@@ -1,5 +1,5 @@
 import flatpickr from 'flatpickr';
-import {Block} from 'notiflix';
+import notiflix from 'notiflix';
 // Додатковий імпорт стилів
 import 'flatpickr/dist/flatpickr.min.css';
 const inputDate = document.querySelector('#datetime-picker');
@@ -11,7 +11,8 @@ const leftHours    = document.querySelector('.value[data-hours]');
 const leftMinutes   = document.querySelector('.value[data-minutes]');
 const leftSeconds = document.querySelector('.value[data-seconds]');
  let dayX = 0
-// console.log(days,hours,minutes,seconds.textContent)
+
+
 const options = {
     enableTime: true,
     time_24hr: true,
@@ -20,21 +21,22 @@ const options = {
  
     onClose(selectedDates) {
         
-        if (selectedDates[0] <= new Date()) {
-            Block.circle,
-              Block.standard('body', 'Please choose a date in the future', {
-                backgroundColor: 'rgba(191,160,160,0.8)',
-                color: 'rgb(0,0,0)',
-
-                svgSize: '50px',
-              });
-            Block.remove('body', 1923);
-            startBtn.setAttribute('disabled', 'true');
-        }
-        else {
-            startBtn.removeAttribute('disabled', 'true');
-            startBtn.setAttribute('active', 'true');
-dayX = selectedDates[0];           
+        if (selectedDates[0] < new Date() || selectedDates[0] === new Date()) {
+            notiflix.Notify.failure("Please choose a date in the future",
+                {
+              width: '300px',
+              position: 'center-top',
+              closeButton: false,
+                timeout: 3000,
+              
+            });
+        
+          notiflix.Report.failure.remove( 1923);
+          startBtn.setAttribute('disabled', 'true');
+        } else {
+          startBtn.removeAttribute('disabled', 'true');
+          startBtn.setAttribute('active', 'true');
+          dayX = selectedDates[0];
         }
     }
 }
