@@ -1,3 +1,7 @@
+import notiflix from 'notiflix';
+const form = document.querySelector('.form');
+const submitBtn = form.querySelector('button[type="submit"]');
+
 function createPromise(position, delay) {
   return new Promise((res, rej) => {
     setTimeout(() => {
@@ -13,9 +17,6 @@ function createPromise(position, delay) {
 }
 //
 
-const form = document.querySelector('.form');
-const submitBtn = form.lastElementChild;
-
 form.addEventListener('submit', onClick);
 
 function onClick(event) {
@@ -24,12 +25,13 @@ function onClick(event) {
     elements: { delay, step, amount },
   } = event.currentTarget;
 
-  for (let i = 0; i > amount.value - 1; i += 1) {
-    createPromise(i, delay.value + step.value * i)
-      .then((message) => { console.log(message);
+  for (let i = 1; i < amount.value; i += 1) {
+    createPromise(i, Number(delay.value) + Number(step.value * (i - 1)))
+      .then(message => {
+        notiflix.Notify.success(message);
       })
-      .catch((message) => { console.log(message)
-         
+      .catch(message => {
+       notiflix.Notify.failure(message);
       });
   }
 }
