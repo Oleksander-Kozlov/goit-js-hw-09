@@ -1,2 +1,0 @@
-!function(){function e(e,n){return new Promise((function(t,o){setTimeout((function(){Math.random()>.3?t("✅ Fulfilled promise ".concat(e," in ").concat(n,"ms")):o("❌ Rejected promise ".concat(e," in ").concat(n,"ms"))}),n)}))}var n=document.querySelector(".form");n.lastElementChild;n.addEventListener("submit",(function(n){n.preventDefault();for(var t=n.currentTarget.elements,o=t.delay,c=t.step,u=t.amount,a=0;a>u.value-1;a+=1)e(a,o.value+c.value*a).then((function(e){console.log(e)})).catch((function(e){console.log(e)}))}))}();
-//# sourceMappingURL=03-promises.390a49ac.js.map
