@@ -58,4 +58,3 @@ function onClick() {
     leftDays.textContent = values[0].toString().padStart(2, '0');
   }
 }
-console.dir(inputDate);
