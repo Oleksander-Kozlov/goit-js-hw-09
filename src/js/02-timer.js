@@ -18,7 +18,8 @@ const options = {
   enableTime: true,
   time_24hr: true,
   defaultDate: new Date(),
-  minuteIncrement: 1,
+    minuteIncrement: 1,
+  
 
   onClose(selectedDates) {
     if (selectedDates[0] < new Date() || selectedDates[0] === new Date()) {
@@ -29,7 +30,8 @@ const options = {
       startBtn.setAttribute('disabled', 'true');
     } else {
       startBtn.removeAttribute('disabled', 'true');
-      startBtn.setAttribute('active', 'true');
+        startBtn.setAttribute('active', 'true');
+            inputDate.setAttribute('disabled', 'true');
       dayX = selectedDates[0];
     }
   },
@@ -38,11 +40,15 @@ flatpickr(inputDate, options);
 
 startBtn.addEventListener('click', onClick);
 function onClick() {
-  const targetDate = dayX;
-  setInterval(() => {
-    const currentDate = new Date();
-    addLeadingZero(convertMs(targetDate - currentDate)), 1000;
-  });
+    const targetDate = dayX;
+    
+    setInterval(() => {
+        const currentDate = new Date();
+        const ms = Number(targetDate - currentDate);
+        if (ms>0) {
+            addLeadingZero(convertMs(ms)), 1000;
+        } else {inputDate.removeAttribute('disabled', 'true');}
+    });
 
   function addLeadingZero(value) {
     const values = Object.values(value);
@@ -52,3 +58,4 @@ function onClick() {
     leftDays.textContent = values[0].toString().padStart(2, '0');
   }
 }
+console.dir(inputDate);
